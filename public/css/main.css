@@ -1,4 +1,9 @@
 html, body {
-    background-color: lightblue;
-    background-color: red;
+    margin: 0;
+    padding: 0;
+}
+
+#err-404-img{
+    margin: 0 auto;
+    max-height: 30vh;
 }

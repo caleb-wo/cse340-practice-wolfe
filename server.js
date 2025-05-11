@@ -47,6 +47,34 @@ app.get('/contact', (req, res) => {
     res.render("index", { title, content, NODE_ENV, PORT });
 });
 
+/**
+ * Error Handling Middleware
+ */
+ 
+// Catch-all middleware for unmatched routes (404)
+app.use((req, res, next) => {
+    const err = new Error('Page Not Found');
+    err.status = 404;
+    next(err);
+});
+
+// Global error handler middleware
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+ 
+    const status = err.status || 500;
+    const context = {
+        title: status === 404 ? 'Page Not Found' : 'Internal Server Error',
+        error: err.message,
+        stack: err.stack,
+        NODE_ENV,
+        PORT
+    };
+ 
+    // Render the appropriate template based on status code
+    res.status(status).render(`errors/${status === 404 ? '404' : '500'}`, context);
+});
+
 if (NODE_ENV.includes('dev')) {
     const ws = await import('ws');
  

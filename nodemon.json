@@ -1,4 +1,5 @@
 {
     "ext": "js css ejs",
-    "exec": "node --env-file=.env server.js"
+    "exec": "node --env-file=.env server.js",
+    "ignore": ["node_modules", ".git", "data/**", "logs/**", "tmp/**"]
 }
