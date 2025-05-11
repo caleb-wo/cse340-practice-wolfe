@@ -26,6 +26,12 @@ app.set('view engine', 'ejs');
 // Set the views directory (where your templates are located)
 app.set('views', path.join(__dirname, 'src/views'));
  
+// Middleware to add current year to res.locals
+app.use((req, res, next) => {
+    // Get the current year for copyright notice
+    res.locals.currentYear = new Date().getFullYear();
+    next();
+});
 /**
  * Routes
  */
@@ -45,6 +51,25 @@ app.get('/contact', (req, res) => {
     const title = "Contact";
     const content = "<h1>This is Contact.</h1><p>This page is last in line for a reason. That's all you need to know.</p>";
     res.render("index", { title, content, NODE_ENV, PORT });
+});
+
+// Updated route to handle both route and query parameters
+app.get('/explore/:category/:id', (req, res) => {
+    // Get route parameters
+    const { category, id } = req.params;
+ 
+    // Get query parameters (optional)
+    const { sort = 'default', filter = 'none' } = req.query;
+ 
+    // Log all parameters for debugging
+    console.log('Route Parameters:', req.params);
+    console.log('Query Parameters:', req.query);
+ 
+    // Set the title for the page
+    const title = `Exploring ${category}`;
+ 
+    // Render the template with all parameters
+    res.render('explore', { title, category, id, sort, filter, NODE_ENV, PORT });
 });
 
 /**
