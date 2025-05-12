@@ -15,8 +15,12 @@ html, body {
     color: var(--store-dark);
 }
 
-h1{
-    font-family: var(--title-font);
+main{
+    h1{
+        display: block;
+        font-family: var(--title-font);
+        margin: 0 auto;
+    }
 }
 
 /* — — — — — — HEADER.ejs */
@@ -156,8 +160,25 @@ footer p{
             color: #999;
             text-align: center;
             margin-top: 2rem;
-        }
+}
 
+@media screen and (min-width:1100px){
+    .details-view{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+    .details-view .product-card{
+        width: 40vw;
+        align-items: center;
+        margin: 0;
+        padding: 1em;
+    }
+
+    .details-view .product-card #product-img{
+        border-radius: 20px;
+    }
+}
 
 /* — — — — — — 404.ejs */
 #err-404-img{
