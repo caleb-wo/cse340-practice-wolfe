@@ -27,23 +27,7 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'src/views'));
  
 
-// MOCK Products
-const products = [
-    {
-        id: 1,
-        name: "Kindle E-Reader",
-        description: "Lightweight e-reader with a glare-free display and weeks of battery life.",
-        price: 149.99,
-        image: "https://picsum.photos/id/367/800/600"
-    },
-    {
-        id: 2,
-        name: "Vintage Film Camera",
-        description: "Capture timeless moments with this classic vintage film camera, perfect for photography enthusiasts.",
-        price: 199.99,
-        image: "https://picsum.photos/id/250/800/600"
-    }
-];
+
 
 /**
  * Middleware Functions 
@@ -89,8 +73,13 @@ app.use((req, res, next) => {
 app.use((req, res, next) => {
     // Get the current year for copyright notice
     res.locals.currentYear = new Date().getFullYear();
+
+    // Add NODE_ENV for all views
+    res.locals.NODE_ENV = process.env.NODE_ENV || "development";
+
     next();
 });
+
 
 // Middleware to validate display parameter
 const validateDisplayMode = (req, res, next) => {
@@ -126,26 +115,45 @@ app.use((req, res, next) => {
 app.get('/', (req, res) => {
     const title = "Home Page";
     const content = "<h1>Welcome to the home page!</h1><p>This is the main content of the Home Page.</p>";
-    res.render("index", { title, content, NODE_ENV, PORT });
+    res.render("index", { title, content, PORT });
 });
  
 app.get('/about', (req, res) => {
     const title = "About";
     const content = "<h1>This is The About page.</h1><p>Between the Home Page and Contact, it is the best.</p>";
-    res.render("index", { title, content, NODE_ENV, PORT });
+    res.render("index", { title, content, PORT });
 });
  
 app.get('/contact', (req, res) => {
     const title = "Contact";
     const content = "<h1>This is Contact.</h1><p>This page is last in line for a reason. That's all you need to know.</p>";
-    res.render("index", { title, content, NODE_ENV, PORT });
+    res.render("index", { title, content, PORT });
 });
 
 // Products page route with display mode validation
 app.get('/products/:display', validateDisplayMode, (req, res) => {
     const title = "Our Products";
     const { display } = req.params;
-    res.render('products', { title, products, display, NODE_ENV, PORT });
+
+    // MOCK Products
+    const products = [
+        {
+            id: 1,
+            name: "Kindle E-Reader",
+            description: "Lightweight e-reader with a glare-free display and weeks of battery life.",
+            price: 149.99,
+            image: "https://picsum.photos/id/367/800/600"
+        },
+        {
+            id: 2,
+            name: "Vintage Film Camera",
+            description: "Capture timeless moments with this classic vintage film camera, perfect for photography enthusiasts.",
+            price: 199.99,
+            image: "https://picsum.photos/id/250/800/600"
+        }
+    ];
+
+    res.render('products', { title, products, display, PORT });
 });
  
 // Default products route (redirects to grid view)
@@ -169,7 +177,7 @@ app.get('/explore/:category/:id', (req, res) => {
     const title = `Exploring ${category}`;
  
     // Render the template with all parameters
-    res.render('explore', { title, category, id, sort, filter, NODE_ENV, PORT });
+    res.render('explore', { title, category, id, sort, filter, PORT });
 });
 
 /**
@@ -192,7 +200,6 @@ app.use((err, req, res, next) => {
         title: status === 404 ? 'Page Not Found' : 'Internal Server Error',
         error: err.message,
         stack: err.stack,
-        NODE_ENV,
         PORT
     };
  
