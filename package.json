@@ -4,7 +4,7 @@
   "description": "",
   "type": "module",
   "scripts": {
-    "dev": "node restore.js; nodemon --env-file=.env server.js",
+    "dev": "node restore.js 3000 3001; nodemon --env-file=.env server.js",
     "start": "node --env-file=.env server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

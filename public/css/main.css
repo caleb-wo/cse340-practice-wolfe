@@ -74,6 +74,16 @@ footer p{
     margin-right: 1em;
 }
 
+/* — — — — — — ABOUT.ejs */
+.profile-picture {
+    max-width: 300px;
+    max-height: 300px;
+    border-radius: 50%;
+    border: 20px solid var(--store-accent);
+    margin: 10px auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
 /* — — — — — — PRODUCTS.ejs */
 .products-container {
     margin: 2rem 0;

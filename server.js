@@ -49,7 +49,7 @@ app.use('/products', productsRoutes);
 // 404 Error Handler
 app.use((req, res, next) => {
     const err = new Error('Page Not Found');
-    // err.status = 404;
+    err.status = 404;
     next(err); // Forward to the global error handler
 });
  
@@ -57,18 +57,13 @@ app.use((req, res, next) => {
 app.use((err, req, res, next) => {
     // Log the error for debugging
     console.error(err.stack);
-
-    // Get environment
-    const environment = NODE_ENV;
  
     // Set default status and determine error type
-    // const status = err.status || 500;
-    const status = 500;
+    const status = err.status || 500;
     const context = {
         title: status === 404 ? 'Page Not Found' : 'Internal Server Error',
         error: err.message,
-        stack: err.stack,
-        env: environment
+        stack: err.stack
     };
  
     // Render the appropriate template based on status code
