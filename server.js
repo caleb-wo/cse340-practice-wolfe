@@ -63,7 +63,8 @@ app.use((err, req, res, next) => {
     const context = {
         title: status === 404 ? 'Page Not Found' : 'Internal Server Error',
         error: err.message,
-        stack: err.stack
+        stack: err.stack,
+        environment: NODE_ENV
     };
  
     // Render the appropriate template based on status code

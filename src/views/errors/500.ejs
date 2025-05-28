@@ -3,9 +3,9 @@
     <h1>Internal Server Error</h1>
     <p>Something went wrong on our server. Our team has been notified and is working to fix the issue.</p>
     <h2>Error details (for development only)</h2>
-    <% if (env === "development") {%>
+    <% if (environment === "development") {%>
 
-    <h3>Environment is currently "<%{env}%>"</h3>
+    <h3>Environment is currently "<%{environment}%>"</h3>
     <pre><%- error %>
     <%- stack %></pre>
 
