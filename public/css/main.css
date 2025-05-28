@@ -75,6 +75,14 @@ footer p{
 }
 
 /* — — — — — — ABOUT.ejs */
+#about-main{
+    text-align: center;
+    align-items: center;
+    justify-items: center;
+    align-content: center;
+    justify-content: center;
+}
+
 .profile-picture {
     max-width: 300px;
     max-height: 300px;
@@ -148,7 +156,7 @@ footer p{
 }
  
 .view-toggle {
-    margin-top: 2rem;
+    margin: 2rem 0;
     text-align: center;
 }
  
