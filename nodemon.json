@@ -1,11 +1,5 @@
 {
     "ext": "js css ejs",
     "exec": "node server.js",
-    "ignore": ["node_modules/**",
-                ".git/**",
-                "data/**",
-                "logs/**",
-                "tmp/**",
-                "*.log"
-            ]
+    "ignore": ["node_modules", ".git", "data/**", "logs/**", "tmp/**"]
 }

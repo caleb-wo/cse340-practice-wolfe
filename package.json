@@ -4,14 +4,14 @@
   "description": "",
   "type": "module",
   "scripts": {
-    "dev": "node restore.js 3000 3001 && nodemon --env-file=.env server.js",
+    "dev": "node restore.js; nodemon --env-file=.env server.js",
     "start": "node --env-file=.env server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "Caleb Wolfe",
   "license": "ISC",
-  "packageManager": "pnpm@10.11.0",
+  "packageManager": "pnpm@10.9.0",
   "dependencies": {
     "ejs": "^3.1.10",
     "express": "^5.1.0"
